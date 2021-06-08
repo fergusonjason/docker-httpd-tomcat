@@ -1,17 +1,38 @@
 version: '3'
 services:
         httpd:
-
+                container_name: httpd
+                restart: always
+                build: ./httpd
+                networks:
+                        static-network:
+                                ipv4_address: 192.168.10.1
         tomcat1:
-
+                container_name: tomcat1
+                build: ./tomcat1
+                depends_on:
+                        - httpd
+                ports:
+                        - 8080:8080
+                        - 8009:8009
+                networks:
+                        static-network:
+                                ipv4_address: 192.168.10.10
         tomcat2:
-
-        rabbitmq1:
-
-        rabbitmq2:
+                container_name: tomcat2
+                build: ./tomcat2
+                depends_on:
+                        - httpd
+                ports:
+                        - 8080:8080
+                        - 8009:8009
+                networks:
+                        static-network:
+                                ipv4_address: 192.168.10.11
 
 networks:
         static-network:
+                driver: bridge
                 ipam:
                         config:
                                 - subnet: 192.168.10.0/16
