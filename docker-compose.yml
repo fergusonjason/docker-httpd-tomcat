@@ -7,9 +7,11 @@ services:
                 networks:
                         static-network:
                                 ipv4_address: "192.168.10.10"
+        # To add a new tomcat node, just copy and add a new service definition, then change the
+        # container_name and ipv4_address
         tomcat1:
                 container_name: tomcat1
-                build: ./tomcat1
+                build: ./tomcat
                 depends_on:
                         - httpd
                 networks:
@@ -17,7 +19,7 @@ services:
                                 ipv4_address: "192.168.10.21"
         tomcat2:
                 container_name: tomcat2
-                build: ./tomcat2
+                build: ./tomcat
                 depends_on:
                         - httpd
                 networks:
