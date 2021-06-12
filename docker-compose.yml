@@ -1,19 +1,17 @@
 version: "3"
 services:
-        httpd:
-                container_name: httpd
+        nginx:
+                container_name: nginx
+                build: ./nginx
                 restart: always
-                build: ./httpd
                 networks:
                         static-network:
                                 ipv4_address: "192.168.10.10"
-        # To add a new tomcat node, just copy and add a new service definition, then change the
-        # container_name and ipv4_address
         tomcat1:
                 container_name: tomcat1
                 build: ./tomcat
                 depends_on:
-                        - httpd
+                        - nginx
                 networks:
                         static-network:
                                 ipv4_address: "192.168.10.21"
@@ -21,7 +19,7 @@ services:
                 container_name: tomcat2
                 build: ./tomcat
                 depends_on:
-                        - httpd
+                        - nginx
                 networks:
                         static-network:
                                 ipv4_address: "192.168.10.22"
