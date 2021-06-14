@@ -3,27 +3,32 @@ services:
         nginx:
                 container_name: nginx
                 build: ./nginx
+                volumes:
+                        - ${PWD}/logs/nginx:/var/log/nginx
                 restart: always
                 networks:
                         static-network:
                                 ipv4_address: "192.168.10.10"
         tomcat1:
-                container_name: tomcat1
+                container_name: tomcat_node_1
                 build: ./tomcat
+                volumes:
+                        - ${PWD}/logs/tomcat/node1:/usr/local/tomcat/logs
                 depends_on:
                         - nginx
                 networks:
                         static-network:
                                 ipv4_address: "192.168.10.21"
         tomcat2:
-                container_name: tomcat2
+                container_name: tomcat_node_2
                 build: ./tomcat
+                volumes:
+                        - ${PWD}/logs/tomcat/node2:/usr/local/tomcat/logs
                 depends_on:
                         - nginx
                 networks:
                         static-network:
                                 ipv4_address: "192.168.10.22"
-
 networks:
         static-network:
                 driver: bridge

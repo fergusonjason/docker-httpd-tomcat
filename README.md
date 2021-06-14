@@ -7,4 +7,4 @@ TODO List:
 - ~~Switch to alpine images~~ (Foolish me, there ARE no alpine versions of Tomcat)
 - ~~Activate Manager on tomcat nodes so I can deploy app via Maven Cargo~~
 - ~~Switch over to nginx since the apache and mod_jk guys decided to make this as difficult as humanly possible~~
-- Map the log files over to the host from the container
+- ~~Map the log files over to the host from the container~~
